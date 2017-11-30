@@ -1,3 +1,5 @@
+## Python gitignore
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -57,5 +59,12 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+
+## NodeJS gitignore
+
+# Dependency directories
+node_modules/
+
+## User gitignore
 
 db.sqlite3
