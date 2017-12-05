@@ -1,3 +1,5 @@
+from django.conf.urls import url
+from django.urls import include
 from rest_framework.routers import DefaultRouter
 
 from . import views
@@ -7,3 +9,6 @@ router.register(r'playlists', views.PlaylistViewSet)
 router.register(r'users', views.UserViewSet)
 
 urlpatterns = router.urls
+urlpatterns += [
+    url(r'^api-auth/', include('rest_framework.urls')),
+]
