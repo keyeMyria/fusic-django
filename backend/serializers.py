@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from .models import Playlist, Radio
+from .models import Playlist, Radio, RadioVote, Song
 from rest_framework import serializers
 
 
@@ -9,13 +9,28 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'url', 'username', 'email', 'groups')
 
 
+class SongSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Song
+        fields = ('id', 'name')
+
+
 class PlaylistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Playlist
-        fields = ('pk', 'name', 'cover_url', 'created_date', 'modified_date')
+        fields = ('id', 'name', 'cover_url', 'created_date', 'modified_date')
+
+
+class RadioVoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RadioVote
+        fields = ('owner', 'song')
 
 
 class RadioSerializer(serializers.ModelSerializer):
+    votes = RadioVoteSerializer(many=True)
+    songs = SongSerializer(many=True)
+
     class Meta:
         model = Radio
-        fields = ('pk', 'name', 'cover_url', 'created_date', 'modified_date')
+        fields = ('id', 'name', 'cover_url', 'created_date', 'modified_date', 'songs', 'votes')

@@ -49,7 +49,7 @@ class Radio(models.Model):
 
 
 class RadioVote(models.Model):
-    radio = models.ForeignKey(Radio, on_delete=models.CASCADE)
+    radio = models.ForeignKey(Radio, related_name='votes', on_delete=models.CASCADE)
     song = models.ForeignKey(Song, on_delete=models.CASCADE)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
