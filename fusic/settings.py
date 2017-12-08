@@ -121,3 +121,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# https://django-extensions.readthedocs.io/en/latest/shell_plus.html
+SHELL_PLUS_POST_IMPORTS = [
+    ('backend.serializers', '*'),
+]
