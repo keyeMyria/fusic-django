@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Search from './Search';
-import Radio from './Radio';
+import RadioView from './RadioView';
 
 class App extends Component {
   render() {
-    return <Radio />;
+    return <RadioView />;
   }
 }
 
