@@ -3,7 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "autosuggest-highlight": "^3.1.1",
+    "classnames": "^2.2.5",
+    "material-ui": "^1.0.0-beta.22",
+    "prop-types": "^15.6.0",
     "react": "^16.2.0",
+    "react-autosuggest": "^9.3.2",
     "react-dom": "^16.2.0",
     "react-scripts": "1.0.17"
   },
@@ -11,7 +16,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "prettier --single-quote --write **/*.js"
   },
   "proxy": {
     "/api": {
@@ -22,5 +28,8 @@
       "target": "http://localhost:8000",
       "ws": true
     }
+  },
+  "devDependencies": {
+    "prettier": "^1.9.1"
   }
 }
