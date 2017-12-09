@@ -5,7 +5,7 @@ import { withStyles } from 'material-ui/styles';
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
-// import List from 'material-ui/List';
+import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 // import { MenuItem } from 'material-ui/Menu';
 // import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
@@ -17,7 +17,6 @@ const styles = theme => ({
   root: {
     width: '100%',
     height: '100%',
-    // marginTop: theme.spacing.unit * 3,
     zIndex: 1,
     overflow: 'hidden'
   },
@@ -29,14 +28,9 @@ const styles = theme => ({
   },
   appBar: {
     position: 'absolute',
-    width: `calc(100% - ${drawerWidth}px)`
-  },
-  'appBar-left': {
+    width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth
   },
-  //   'appBar-right': {
-  //     marginRight: drawerWidth,
-  //   },
   drawerPaper: {
     position: 'relative',
     height: '100%',
@@ -60,10 +54,10 @@ const PermanentDrawer = ({ classes }) => {
   return (
     <div className={classes.root}>
       <div className={classes.appFrame}>
-        <AppBar className={classNames(classes.appBar, classes['appBar-left'])}>
+        <AppBar className={classNames(classes.appBar)}>
           <Toolbar>
             <Typography type="title" color="inherit" noWrap>
-              Permanent drawer
+              Fusic v4
             </Typography>
           </Toolbar>
         </AppBar>
@@ -75,6 +69,17 @@ const PermanentDrawer = ({ classes }) => {
         >
           <div className={classes.drawerHeader} />
           <Divider />
+          <List>
+            <ListItem button>
+              <ListItemText primary="Browse" />
+            </ListItem>
+            <ListItem button>
+              <ListItemText primary="Playlists" />
+            </ListItem>
+            <ListItem button>
+              <ListItemText primary="Radios" />
+            </ListItem>
+          </List>
         </Drawer>
         <main className={classes.content}>
           <Typography type="body1">
