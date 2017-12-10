@@ -12,8 +12,8 @@ const styles = theme => ({
   }
 });
 
-function Radio(props) {
-  const { classes } = props;
+function Radio({ classes, radio }) {
+  console.log(radio);
   return (
     <div className={classes.root}>
       <List>

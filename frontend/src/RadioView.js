@@ -5,10 +5,10 @@ import { withStyles } from 'material-ui/styles';
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
-import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
+import List, { ListItem, ListItemText } from 'material-ui/List';
 import Typography from 'material-ui/Typography';
 import Divider from 'material-ui/Divider';
-import Radio from './Radio';
+import RadioContainer from './RadioContainer';
 
 const drawerWidth = 240;
 
@@ -84,7 +84,7 @@ const PermanentDrawer = ({ classes }) => {
           <Typography type="body1">
             {'You think water moves fast? You should see ice.'}
           </Typography>
-          <Radio />
+          <RadioContainer id={1} />
         </main>
       </div>
     </div>
