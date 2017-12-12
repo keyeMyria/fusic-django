@@ -1,15 +1,24 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Radio from './Radio';
+
+import { subscribe, unsubscribe } from '../actions';
+
+const mapStateToProps = state => {
+  return {
+    radio: state.radio
+  };
+};
 
 class RadioContainer extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       loading: true
     };
 
-    const { id } = props;
-    fetch(`api/radios/${id}`)
+    fetch(`api/radios/${props.id}`)
       .then(function(res) {
         if (res.status === 200) return res.json();
         else throw new Error(res.statusText);
@@ -33,12 +42,31 @@ class RadioContainer extends React.Component {
         });
       });
   }
+
+  componentDidMount() {
+    const { dispatch, id } = this.props;
+    dispatch(subscribe(id));
+  }
+
+  componentWillUnmount() {
+    const { dispatch, id } = this.props;
+    dispatch(unsubscribe(id));
+  }
+
+  onVote = (id, e) => {
+    console.log('onVote:', id);
+  };
+
   render() {
     const { radio } = this.state;
-    return radio ? <Radio radio={radio} /> : <div>Loading...</div>;
+    return radio ? (
+      <Radio radio={radio} onVote={this.onVote} />
+    ) : (
+      <div>Loading...</div>
+    );
   }
 }
 
 RadioContainer.propTypes = {};
 
-export default RadioContainer;
+export default connect(mapStateToProps)(RadioContainer);

@@ -12,7 +12,11 @@
     "react": "^16.2.0",
     "react-autosuggest": "^9.3.2",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.0.17"
+    "react-redux": "^5.0.6",
+    "react-scripts": "1.0.17",
+    "redux": "^3.7.2",
+    "redux-actions": "^2.2.1",
+    "redux-devtools-extension": "^2.13.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -32,6 +36,6 @@
     }
   },
   "devDependencies": {
-    "prettier": "^1.9.1"
+    "prettier": "^1.9.2"
   }
 }

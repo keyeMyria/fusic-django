@@ -19,7 +19,11 @@ const styles = theme => ({
   }
 });
 
-function Radio({ classes, radio }) {
+function Radio({ classes, radio, onVote }) {
+  function onClick(id, e) {
+    onVote(id, e);
+  }
+
   console.log(radio);
   return (
     <div className={classes.root}>
@@ -28,7 +32,7 @@ function Radio({ classes, radio }) {
           <Avatar src="https://spark.adobe.com/images/landing/examples/sonata-cd-cover.jpg" />
           <ListItemText primary="Work" secondary="Jan 7, 2016" />
           <ListItemSecondaryAction>
-            <IconButton aria-label="Comments">
+            <IconButton onClick={onClick.bind(this, 1)}>
               <ExpandLessIcon />
             </IconButton>
           </ListItemSecondaryAction>
@@ -38,7 +42,7 @@ function Radio({ classes, radio }) {
           <Avatar src="http://www.covermesongs.com/wp-content/uploads/2013/01/doors-the-doors-cover-front.jpg" />
           <ListItemText primary="Work" secondary="Jan 7, 2016" />
           <ListItemSecondaryAction>
-            <IconButton aria-label="Comments">
+            <IconButton onClick={onClick.bind(this, 2)}>
               <ExpandLessIcon />
             </IconButton>
           </ListItemSecondaryAction>
@@ -48,7 +52,7 @@ function Radio({ classes, radio }) {
           <Avatar src="https://www.billboard.com/files/styles/900_wide/public/media/Pink-Floyd-Dark-Side-of-the-Moon-2017-billboard-1240.jpg" />
           <ListItemText primary="Work" secondary="Jan 7, 2016" />
           <ListItemSecondaryAction>
-            <IconButton aria-label="Comments">
+            <IconButton onClick={onClick.bind(this, 3)}>
               <ExpandLessIcon />
             </IconButton>
           </ListItemSecondaryAction>
@@ -59,7 +63,9 @@ function Radio({ classes, radio }) {
 }
 
 Radio.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  radio: PropTypes.object.isRequired,
+  onVote: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(Radio);
