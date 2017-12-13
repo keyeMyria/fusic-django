@@ -6,6 +6,7 @@ import { createStore } from 'redux';
 import App from './App';
 import reducers from './reducers';
 import { devToolsEnhancer } from 'redux-devtools-extension';
+import radioUpdater from './radioUpdater';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
@@ -17,5 +18,7 @@ render(
   </Provider>,
   document.getElementById('root')
 );
+
+radioUpdater(store);
 
 registerServiceWorker();
