@@ -34,7 +34,21 @@ const subscriptionReducer = handleActions(
 );
 
 function setEntity(entityMap = {}, entity) {
-  entityMap[entity.id] = entity;
+  return {
+    ...entityMap,
+    [entity.id]: entity
+  };
+}
+
+function setEntities(entityMap = {}, entities) {
+  const updatedEntities = {};
+  for (const entity of entities) {
+    updatedEntities[entity.id] = entity;
+  }
+  return {
+    ...entityMap,
+    ...updatedEntities
+  };
 }
 
 const radioReducer = handleActions(
@@ -42,16 +56,11 @@ const radioReducer = handleActions(
     [updateRadio]: (state, action) => {
       const { songs, votes, ...radio } = action.payload;
 
-      state = { ...state };
-      setEntity(state.radios, radio);
-      for (const song of songs) {
-        setEntity(state.songs, song);
-      }
-      for (const vote of votes) {
-        setEntity(state.votes, vote);
-      }
-
-      return state;
+      return {
+        radios: setEntity(state.radios, radio),
+        songs: setEntities(state.songs, songs),
+        votes: setEntities(state.votes, votes)
+      };
     }
   },
   {
