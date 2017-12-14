@@ -19,19 +19,21 @@ function observeStore(store, select, onChange) {
   return unsubscribe;
 }
 
+function apiCall(url) {
+  console.log('GET:', url);
+  return fetch(url).then(function(res) {
+    if (res.status === 200) return res.json();
+    else throw new Error(res.statusText);
+  });
+}
+
 export default function radioUpdater(store) {
   // watch all radio subscriptions
   observeStore(store, state => state.subscriptions, function(subscriptions) {
     for (const id of Object.keys(subscriptions)) {
-      console.log('update', id);
-      fetch(`api/radios/${id}`)
-        .then(function(res) {
-          if (res.status === 200) return res.json();
-          else throw new Error(res.statusText);
-        })
-        .then(res => {
-          store.dispatch(updateRadio(res));
-        });
+      apiCall(`api/radios/${id}`).then(res => {
+        store.dispatch(updateRadio(res));
+      });
     }
   });
 }
