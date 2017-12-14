@@ -9,12 +9,12 @@ const subscriptionReducer = handleActions(
       if (id in state)
         return {
           ...state,
-          [id]: state.id + 1
+          [id]: state.id + 1,
         };
       else
         return {
           ...state,
-          [id]: 1
+          [id]: 1,
         };
     },
     [unsubscribe]: (state, action) => {
@@ -22,21 +22,21 @@ const subscriptionReducer = handleActions(
       if (id in state)
         return {
           ...state,
-          [id]: state.id + 1
+          [id]: state.id + 1,
         };
       else {
         const { [id]: _, ...newState } = state;
         return newState;
       }
-    }
+    },
   },
-  {}
+  {},
 );
 
 function setEntity(entityMap = {}, entity) {
   return {
     ...entityMap,
-    [entity.id]: entity
+    [entity.id]: entity,
   };
 }
 
@@ -47,7 +47,7 @@ function setEntities(entityMap = {}, entities) {
   }
   return {
     ...entityMap,
-    ...updatedEntities
+    ...updatedEntities,
   };
 }
 
@@ -59,15 +59,15 @@ const radioReducer = handleActions(
       return {
         radios: setEntity(state.radios, radio),
         songs: setEntities(state.songs, songs),
-        votes: setEntities(state.votes, votes)
+        votes: setEntities(state.votes, votes),
       };
-    }
+    },
   },
   {
     radios: {},
     songs: {},
-    votes: {}
-  }
+    votes: {},
+  },
 );
 
 export default function rootReducer(state = {}, action) {
@@ -76,6 +76,6 @@ export default function rootReducer(state = {}, action) {
 
   return {
     subscriptions,
-    radios
+    radios,
   };
 }

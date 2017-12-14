@@ -18,14 +18,14 @@ const middleware =
 
 const store = createStore(
   reducers,
-  composeWithDevTools(applyMiddleware(...middleware))
+  composeWithDevTools(applyMiddleware(...middleware)),
 );
 
 render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 radioUpdater(store);

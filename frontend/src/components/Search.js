@@ -42,7 +42,7 @@ const suggestions = [
   { label: 'Bouvet Island' },
   { label: 'Brazil' },
   { label: 'British Indian Ocean Territory' },
-  { label: 'Brunei Darussalam' }
+  { label: 'Brunei Darussalam' },
 ];
 
 function renderInput(inputProps) {
@@ -56,9 +56,9 @@ function renderInput(inputProps) {
       inputRef={ref}
       InputProps={{
         classes: {
-          input: classes.input
+          input: classes.input,
         },
-        ...other
+        ...other,
       }}
     />
   );
@@ -81,7 +81,7 @@ function renderSuggestion(suggestion, { query, isHighlighted }) {
               <strong key={index} style={{ fontWeight: 500 }}>
                 {part.text}
               </strong>
-            )
+            ),
         )}
       </div>
     </MenuItem>
@@ -126,49 +126,49 @@ const styles = theme => ({
   container: {
     flexGrow: 1,
     position: 'relative',
-    height: 200
+    height: 200,
   },
   suggestionsContainerOpen: {
     position: 'absolute',
     marginTop: theme.spacing.unit,
     marginBottom: theme.spacing.unit * 3,
     left: 0,
-    right: 0
+    right: 0,
   },
   suggestion: {
-    display: 'block'
+    display: 'block',
   },
   suggestionsList: {
     margin: 0,
     padding: 0,
-    listStyleType: 'none'
+    listStyleType: 'none',
   },
   textField: {
-    width: '100%'
-  }
+    width: '100%',
+  },
 });
 
 class IntegrationAutosuggest extends React.Component {
   state = {
     value: '',
-    suggestions: []
+    suggestions: [],
   };
 
   handleSuggestionsFetchRequested = ({ value }) => {
     this.setState({
-      suggestions: getSuggestions(value)
+      suggestions: getSuggestions(value),
     });
   };
 
   handleSuggestionsClearRequested = () => {
     this.setState({
-      suggestions: []
+      suggestions: [],
     });
   };
 
   handleChange = (event, { newValue }) => {
     this.setState({
-      value: newValue
+      value: newValue,
     });
   };
 
@@ -181,7 +181,7 @@ class IntegrationAutosuggest extends React.Component {
           container: classes.container,
           suggestionsContainerOpen: classes.suggestionsContainerOpen,
           suggestionsList: classes.suggestionsList,
-          suggestion: classes.suggestion
+          suggestion: classes.suggestion,
         }}
         renderInputComponent={renderInput}
         suggestions={this.state.suggestions}
@@ -195,7 +195,7 @@ class IntegrationAutosuggest extends React.Component {
           classes,
           placeholder: 'Search a country (start with a)',
           value: this.state.value,
-          onChange: this.handleChange
+          onChange: this.handleChange,
         }}
       />
     );
@@ -203,7 +203,7 @@ class IntegrationAutosuggest extends React.Component {
 }
 
 IntegrationAutosuggest.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(IntegrationAutosuggest);

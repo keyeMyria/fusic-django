@@ -17,23 +17,23 @@ const styles = theme => ({
     width: '100%',
     height: '100%',
     zIndex: 1,
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   appFrame: {
     position: 'relative',
     display: 'flex',
     width: '100%',
-    height: '100%'
+    height: '100%',
   },
   appBar: {
     position: 'absolute',
     width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth
+    marginLeft: drawerWidth,
   },
   drawerPaper: {
     position: 'relative',
     height: '100%',
-    width: drawerWidth
+    width: drawerWidth,
   },
   drawerHeader: theme.mixins.toolbar,
   content: {
@@ -44,9 +44,9 @@ const styles = theme => ({
     marginTop: 56,
     [theme.breakpoints.up('sm')]: {
       height: 'calc(100% - 64px)',
-      marginTop: 64
-    }
-  }
+      marginTop: 64,
+    },
+  },
 });
 
 const PermanentDrawer = ({ classes }) => {
@@ -63,7 +63,7 @@ const PermanentDrawer = ({ classes }) => {
         <Drawer
           type="permanent"
           classes={{
-            paper: classes.drawerPaper
+            paper: classes.drawerPaper,
           }}
         >
           <div className={classes.drawerHeader} />
@@ -92,7 +92,7 @@ const PermanentDrawer = ({ classes }) => {
 };
 
 PermanentDrawer.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(PermanentDrawer);

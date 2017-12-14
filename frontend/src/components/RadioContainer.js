@@ -6,7 +6,7 @@ import { subscribe, unsubscribe } from '../actions';
 
 const mapStateToProps = state => {
   return {
-    radio: state.radio
+    radio: state.radio,
   };
 };
 
@@ -15,7 +15,7 @@ class RadioContainer extends React.Component {
     super(props);
 
     this.state = {
-      loading: true
+      loading: true,
     };
 
     fetch(`api/radios/${props.id}`)
@@ -38,7 +38,7 @@ class RadioContainer extends React.Component {
 
         radio.songs = map;
         this.setState({
-          radio: radio
+          radio: radio,
         });
       });
   }

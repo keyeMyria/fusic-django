@@ -4,7 +4,7 @@ import { withStyles } from 'material-ui/styles';
 import List, {
   ListItem,
   ListItemText,
-  ListItemSecondaryAction
+  ListItemSecondaryAction,
 } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
 import Divider from 'material-ui/Divider';
@@ -15,8 +15,8 @@ const styles = theme => ({
   root: {
     width: '100%',
     maxWidth: 800,
-    background: theme.palette.background.paper
-  }
+    background: theme.palette.background.paper,
+  },
 });
 
 function Radio({ classes, radio, onVote }) {
@@ -65,7 +65,7 @@ function Radio({ classes, radio, onVote }) {
 Radio.propTypes = {
   classes: PropTypes.object.isRequired,
   radio: PropTypes.object.isRequired,
-  onVote: PropTypes.func.isRequired
+  onVote: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(Radio);
