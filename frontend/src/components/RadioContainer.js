@@ -2,47 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Radio from './Radio';
 
-import { subscribe, unsubscribe } from '../actions';
+import { subscribe, unsubscribe, upVote } from '../actions';
 
 const mapStateToProps = state => {
   return {
-    radio: state.radio,
+    radios: state.radios,
   };
 };
 
 class RadioContainer extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      loading: true,
-    };
-
-    fetch(`api/radios/${props.id}`)
-      .then(function(res) {
-        if (res.status === 200) return res.json();
-        else throw new Error(res.statusText);
-      })
-      .then(({ songs, votes, ...radio }) => {
-        // convert songs to a map
-        const map = new Map();
-        for (const { id, ...song } of songs) {
-          song.votes = [];
-          map.set(id, song);
-        }
-
-        // add votes to the map
-        for (const { owner, song: id } of votes) {
-          map.get(id).votes.push(owner);
-        }
-
-        radio.songs = map;
-        this.setState({
-          radio: radio,
-        });
-      });
-  }
-
   componentDidMount() {
     const { dispatch, id } = this.props;
     dispatch(subscribe(id));
@@ -53,12 +21,33 @@ class RadioContainer extends React.Component {
     dispatch(unsubscribe(id));
   }
 
-  onVote = (id, e) => {
-    console.log('onVote:', id);
+  onVote = (songId, e) => {
+    this.props.dispatch(upVote(songId, this.props.id));
   };
 
   render() {
-    const { radio } = this.state;
+    const { songs, votes, radios } = this.props.radios;
+    const radio = {
+      ...radios[this.props.id],
+      songs: {},
+    };
+
+    // join votes & songs
+    for (const voteId in votes) {
+      const vote = votes[voteId];
+      // only votes on the current radio
+      if (vote.radio === this.props.id) {
+        // make a list of votes for each song
+        if (radio.songs[vote.song]) {
+          radio.songs[vote.song].push(vote);
+        } else {
+          const song = { ...songs[vote.song] }; // shallow copy
+          song.votes = [vote];
+          radio.songs[vote.song] = song;
+        }
+      }
+    }
+
     return radio ? (
       <Radio radio={radio} onVote={this.onVote} />
     ) : (

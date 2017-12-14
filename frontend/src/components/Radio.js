@@ -24,7 +24,7 @@ function Radio({ classes, radio, onVote }) {
     onVote(id, e);
   }
 
-  console.log(radio);
+  console.log('radio:', radio);
   return (
     <div className={classes.root}>
       <List>
