@@ -1,5 +1,9 @@
 from django.contrib.auth.models import User
+from django.db import IntegrityError
+from rest_framework import status
 from rest_framework import viewsets, permissions
+from rest_framework.decorators import detail_route
+from rest_framework.response import Response
 
 from .permissions import IsStaffOrReadOnly
 from .models import Playlist, Radio
@@ -16,6 +20,18 @@ class RadioViewSet(viewsets.ModelViewSet):
     queryset = Radio.objects.all()
     serializer_class = RadioSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    @detail_route(methods=['post'])
+    def upvote(self, request, pk=None, **kwargs):
+        radio = self.get_object()
+        if 'song_id' not in request.data:
+            return Response(None, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            radio.votes.create(owner_id=request.user.id, song_id=request.data['song_id'])
+        except IntegrityError:
+            return Response(status=status.HTTP_409_CONFLICT)
+        else:
+            return Response(None, status=status.HTTP_201_CREATED)
 
 
 class UserViewSet(viewsets.ModelViewSet):
