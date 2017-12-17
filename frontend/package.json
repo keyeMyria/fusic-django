@@ -17,7 +17,9 @@
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
     "redux-devtools-extension": "^2.13.2",
-    "redux-immutable-state-invariant": "^2.1.0"
+    "redux-immutable-state-invariant": "^2.1.0",
+    "redux-promise-middleware": "^5.0.0",
+    "reselect": "^3.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
