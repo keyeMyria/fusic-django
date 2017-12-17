@@ -1,18 +1,27 @@
-export function apiCall(promise) {
-  return promise.then(function(res) {
+import Cookies from 'js-cookie';
+
+export function apiCall(input, init = {}) {
+  const { headers = {}, ...initCopy } = init;
+  headers['X-CSRFToken'] = Cookies.get('csrftoken');
+  return fetch(input, {
+    ...initCopy,
+    headers: headers,
+    credentials: 'same-origin',
+  });
+}
+
+export function getRadio(id) {
+  return apiCall(`api/radios/${id}`).then(function(res) {
     if (res.status === 200) return res.json();
     else throw new Error(res.statusText);
   });
 }
 
-export function getRadio(id) {
-  return apiCall(fetch(`api/radios/${id}`));
-}
-
 export function createVote(songId, radioId) {
-  return apiCall(
-    fetch(`api/radios/${radioId}/votes`, {
-      method: 'POST',
-    }),
-  );
+  return apiCall(`api/radios/${radioId}/upvote/`, {
+    method: 'POST',
+  }).then(function(res) {
+    if (res.status === 200) return res.json();
+    else throw new Error(res.statusText);
+  });
 }
