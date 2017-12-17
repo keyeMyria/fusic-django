@@ -24,7 +24,7 @@ class PlaylistSerializer(serializers.ModelSerializer):
 class RadioVoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = RadioVote
-        fields = ('id', 'owner', 'song')
+        fields = ('id', 'owner', 'song', 'radio')
 
 
 class RadioSerializer(serializers.ModelSerializer):
