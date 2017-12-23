@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -72,6 +73,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'fusic.wsgi.application'
 
+# https://channels.readthedocs.io/en/latest/getting-started.html
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "asgiref.inmemory.ChannelLayer",
+        "ROUTING": "fusic.routing.channel_routing",
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
@@ -126,3 +134,29 @@ STATIC_URL = '/static/'
 SHELL_PLUS_POST_IMPORTS = [
     ('backend.serializers', '*'),
 ]
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'colored': {
+            '()': 'colorlog.ColoredFormatter',
+            'format': "%(log_color)s[%(levelname)s] %(name)s: %(message)s",
+        }
+    },
+    'handlers': {
+        'stream': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'colored',
+        },
+    },
+    'loggers': {
+        'daphne.server': {
+            'propagate': False,
+        },
+    },
+    'root': {
+        'handlers': ['stream'],
+        'level': 'DEBUG',
+    }
+}
