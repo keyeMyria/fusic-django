@@ -20,7 +20,21 @@ function observeStore(store, select, onChange) {
   return unsubscribe;
 }
 
+function createUrl(url)
+{
+  const protocol = window.location.protocol === "https:" ? "wss://" : "ws://";
+  return protocol + window.location.host + '/' + url;
+}
+
 export default function radioUpdater(store) {
+  const ws = new WebSocket(createUrl('api/ws'));
+  ws.onmessage = msg => {
+    console.log('message', msg);
+  };
+  ws.onopen = () => {
+    ws.send('hello');
+  };
+
   // watch all radio subscriptions
   observeStore(store, state => state.subscriptions, function(subscriptions) {
     for (const id of Object.keys(subscriptions)) {
