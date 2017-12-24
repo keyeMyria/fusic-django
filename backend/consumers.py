@@ -1,22 +1,40 @@
 import logging
-from pprint import pformat
 
-from channels.auth import channel_session_user, channel_session_user_from_http
+from channels.binding.websockets import WebsocketBinding
+from channels.generic.websockets import WebsocketDemultiplexer
+
+from .models import Radio, RadioVote
 
 logger = logging.getLogger(__name__)
 
 
-@channel_session_user_from_http
-def ws_connect(message):
-    logger.debug(pformat(message.content))
-    logger.debug(pformat(dict(message.channel_session.items())))
+class RadioBinding(WebsocketBinding):
+    model = Radio
+    stream = "radios"
+    fields = ('id', 'name', 'cover_url', 'created_date', 'modified_date', 'songs', 'votes')
 
-    message.reply_channel.send({"accept": True})
+    @classmethod
+    def group_names(cls, instance):
+        return ["radio-updates"]
 
 
-@channel_session_user
-def ws_receive(message):
-    logger.debug(pformat(message.content))
-    logger.debug(pformat(dict(message.channel_session.items())))
+class VoteBinding(WebsocketBinding):
+    model = RadioVote
+    stream = "radios"
+    fields = ('id', 'owner', 'song', 'radio')
 
-    message.reply_channel.send({'text': 'reply ' + message['text']})
+    @classmethod
+    def group_names(cls, instance):
+        group = 'radios-%d' % instance.radio.pk
+        logger.info('update on group: %s', group)
+        return [group]
+
+
+class Demultiplexer(WebsocketDemultiplexer):
+    consumers = {
+        "radios": RadioBinding.consumer,
+    }
+
+    def connection_groups(self, pk, **kwargs):
+        logger.info(repr(kwargs))
+        return ['radios-' + pk]

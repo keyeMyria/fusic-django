@@ -1,7 +1,5 @@
-from channels.routing import route
-from .consumers import ws_connect, ws_receive
+from .consumers import Demultiplexer
 
 channel_routing = [
-    route("websocket.connect", ws_connect),
-    route("websocket.receive", ws_receive),
+    Demultiplexer.as_route(path=r"^/radios/(?P<pk>\d+)/$"),
 ]

@@ -6,7 +6,7 @@ from rest_framework.decorators import detail_route
 from rest_framework.response import Response
 
 from .permissions import IsStaffOrReadOnly
-from .models import Playlist, Radio
+from .models import Playlist, Radio, RadioVote
 from .serializers import PlaylistSerializer, UserSerializer, RadioSerializer
 
 
@@ -32,6 +32,18 @@ class RadioViewSet(viewsets.ModelViewSet):
             return Response(status=status.HTTP_409_CONFLICT)
         else:
             return Response(None, status=status.HTTP_201_CREATED)
+
+    @detail_route(methods=['post'])
+    def downvote(self, request, pk=None, **kwargs):
+        radio = self.get_object()
+        if 'song_id' not in request.data:
+            return Response(None, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            radio.votes.get(owner_id=request.user.id, song_id=request.data['song_id']).delete()
+        except RadioVote.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        else:
+            return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class UserViewSet(viewsets.ModelViewSet):
