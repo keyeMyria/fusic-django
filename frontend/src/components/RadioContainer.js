@@ -21,9 +21,7 @@ class RadioContainer extends React.Component {
     dispatch(unsubscribe(id));
   }
 
-  onVote = (songId, e) => {
-    this.props.dispatch(upVote(songId, this.props.id));
-  };
+  onVote = (songId, e) => this.props.dispatch(upVote(songId, this.props.id));
 
   render() {
     const { songs, votes, radios } = this.props.radios;

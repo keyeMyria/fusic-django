@@ -21,7 +21,9 @@ const styles = theme => ({
 
 function Radio({ classes, radio, onVote }) {
   function onClick(id, e) {
-    onVote(id, e);
+    onVote(id, e).catch(err => {
+      console.log('vote failed:', err);
+    });
   }
 
   console.log('radio:', radio);
