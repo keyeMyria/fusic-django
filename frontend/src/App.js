@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import RadioView from './components/RadioView';
+import RadioPage from './RadioPage';
 
 class App extends Component {
   render() {
-    return <RadioView />;
+    return <RadioPage />;
   }
 }
 

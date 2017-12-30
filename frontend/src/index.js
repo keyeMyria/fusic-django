@@ -4,8 +4,7 @@ import { Provider } from 'react-redux';
 
 import App from './App';
 
-import store from './store';
-import radioUpdater from './radioUpdater';
+import store from './data/store';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
@@ -15,7 +14,5 @@ render(
   </Provider>,
   document.getElementById('root'),
 );
-
-radioUpdater(store);
 
 registerServiceWorker();

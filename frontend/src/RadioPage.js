@@ -8,7 +8,7 @@ import Toolbar from 'material-ui/Toolbar';
 import List, { ListItem, ListItemText } from 'material-ui/List';
 import Typography from 'material-ui/Typography';
 import Divider from 'material-ui/Divider';
-import RadioContainer from './RadioContainer';
+import RadioContainer from './components/radio/RadioContainer';
 
 const drawerWidth = 240;
 

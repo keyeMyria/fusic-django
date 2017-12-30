@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Radio from './Radio';
 
-import { subscribe, unsubscribe, upVote } from '../actions';
+import { subscribe, unsubscribe, upVote } from '../../data/actions';
 
 const mapStateToProps = state => {
   return {
