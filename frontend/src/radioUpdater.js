@@ -1,6 +1,6 @@
 import { updateRadio } from './actions';
 import { getRadio } from './api';
-import { WebSocketBridge } from 'django-channels'
+import { WebSocketBridge } from 'django-channels';
 
 /**
  * Subscribe to a specific slice of the state
@@ -21,11 +21,7 @@ function observeStore(store, select, onChange) {
   return unsubscribe;
 }
 
-
-
-
 export default function radioUpdater(store) {
-
   const ws = new WebSocketBridge();
   ws.connect('/api/radios/1/');
 
@@ -33,8 +29,8 @@ export default function radioUpdater(store) {
     console.log(action, stream);
   });
 
-  ws.demultiplex('echo', function(action) {
-    console.log(action);
+  ws.demultiplex('radios', function(action) {
+    console.log('radios update:', action);
   });
 
   // watch all radio subscriptions
