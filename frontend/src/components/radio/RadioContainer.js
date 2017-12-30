@@ -27,8 +27,8 @@ class RadioContainer extends React.Component {
     const { songs, votes, radios } = this.props.radios;
     const radio = {
       ...radios[this.props.id],
-      songs: {},
     };
+    const radioSongs = {};
 
     // join votes & songs
     for (const voteId in votes) {
@@ -36,15 +36,18 @@ class RadioContainer extends React.Component {
       // only votes on the current radio
       if (vote.radio === this.props.id) {
         // make a list of votes for each song
-        if (radio.songs[vote.song]) {
-          radio.songs[vote.song].push(vote);
+        if (radioSongs[vote.song]) {
+          radioSongs[vote.song].push(vote);
         } else {
           const song = { ...songs[vote.song] }; // shallow copy
           song.votes = [vote];
-          radio.songs[vote.song] = song;
+          radioSongs[vote.song] = song;
         }
       }
     }
+
+    // TODO: sort songs
+    radio.songs = Object.values(radioSongs);
 
     return radio ? (
       <Radio radio={radio} onVote={this.onVote} />
