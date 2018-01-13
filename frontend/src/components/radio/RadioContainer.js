@@ -25,6 +25,9 @@ class RadioContainer extends React.Component {
 
   render() {
     const { songs, votes, radios } = this.props.radios;
+
+    if (!radios[this.props.id]) return <div>Loading...</div>;
+
     const radio = {
       ...radios[this.props.id],
     };
@@ -49,11 +52,7 @@ class RadioContainer extends React.Component {
     // TODO: sort songs
     radio.songs = Object.values(radioSongs);
 
-    return radio ? (
-      <Radio radio={radio} onVote={this.onVote} />
-    ) : (
-      <div>Loading...</div>
-    );
+    return <Radio radio={radio} onVote={this.onVote} />;
   }
 }
 
