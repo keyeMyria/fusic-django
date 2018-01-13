@@ -55,7 +55,7 @@ function Radio({ classes, radio, onVote }) {
   return (
     <div className={classes.root}>
       <Card>
-        <div class={classes.header}>
+        <div className={classes.header}>
           {radio.cover_url ? (
             <CardMedia
               className={classes.cover}
@@ -91,35 +91,24 @@ function Radio({ classes, radio, onVote }) {
         </div>
         <CardContent>
           <List>
-            <ListItem>
-              <Avatar src="https://spark.adobe.com/images/landing/examples/sonata-cd-cover.jpg" />
-              <ListItemText primary="Work" secondary="Jan 7, 2016" />
-              <ListItemSecondaryAction>
-                <IconButton onClick={onClick.bind(this, 1)}>
-                  <ExpandLessIcon />
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-            <Divider inset />
-            <ListItem>
-              <Avatar src="http://www.covermesongs.com/wp-content/uploads/2013/01/doors-the-doors-cover-front.jpg" />
-              <ListItemText primary="Work" secondary="Jan 7, 2016" />
-              <ListItemSecondaryAction>
-                <IconButton onClick={onClick.bind(this, 2)}>
-                  <ExpandLessIcon />
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-            <Divider inset />
-            <ListItem>
-              <Avatar src="https://www.billboard.com/files/styles/900_wide/public/media/Pink-Floyd-Dark-Side-of-the-Moon-2017-billboard-1240.jpg" />
-              <ListItemText primary="Work" secondary="Jan 7, 2016" />
-              <ListItemSecondaryAction>
-                <IconButton onClick={onClick.bind(this, 3)}>
-                  <ExpandLessIcon />
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
+            {radio.songs
+              .map(song => (
+                <ListItem key={'song-' + song.id}>
+                  <Avatar src={song.cover_url} />
+                  <ListItemText primary={song.name} secondary="Jan 7, 2016" />
+                  <ListItemSecondaryAction>
+                    <IconButton onClick={onClick.bind(this, 1)}>
+                      <ExpandLessIcon />
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                </ListItem>
+              ))
+              // add dividers between them
+              .reduce((accu, song, i) => {
+                return accu
+                  ? [...accu, <Divider inset key={i} />, song]
+                  : [song];
+              }, null)}
           </List>
         </CardContent>
       </Card>
