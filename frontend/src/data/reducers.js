@@ -1,37 +1,6 @@
 import { combineReducers } from 'redux';
 import { handleActions } from 'redux-actions';
-import { subscribe, unsubscribe, updateRadio } from './actions';
-
-const subscriptionReducer = handleActions(
-  {
-    [subscribe]: (state, action) => {
-      const id = action.payload;
-      if (id in state)
-        return {
-          ...state,
-          [id]: state.id + 1,
-        };
-      else
-        return {
-          ...state,
-          [id]: 1,
-        };
-    },
-    [unsubscribe]: (state, action) => {
-      const id = action.payload;
-      if (id in state)
-        return {
-          ...state,
-          [id]: state.id + 1,
-        };
-      else {
-        const { [id]: _, ...newState } = state;
-        return newState;
-      }
-    },
-  },
-  {},
-);
+import { updateRadio } from './actions';
 
 function setEntity(entityMap = {}, entity) {
   return {
@@ -71,11 +40,9 @@ const radioReducer = handleActions(
 );
 
 export default function rootReducer(state = {}, action) {
-  const subscriptions = subscriptionReducer(state.subscriptions, action);
   const radios = radioReducer(state.radios, action);
 
   return {
-    subscriptions,
     radios,
   };
 }

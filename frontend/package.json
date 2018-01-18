@@ -8,19 +8,20 @@
     "django-channels": "^1.1.8",
     "isomorphic-fetch": "^2.2.1",
     "js-cookie": "^2.2.0",
-    "material-ui": "^1.0.0-beta.23",
+    "material-ui": "^1.0.0-beta.29",
     "material-ui-icons": "^1.0.0-beta.17",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-autosuggest": "^9.3.2",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
-    "react-scripts": "1.0.17",
+    "react-scripts": "1.1.0",
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
     "redux-devtools-extension": "^2.13.2",
     "redux-immutable-state-invariant": "^2.1.0",
     "redux-promise-middleware": "^5.0.0",
+    "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1"
   },
   "scripts": {
@@ -45,6 +46,6 @@
     }
   },
   "devDependencies": {
-    "prettier": "^1.9.2"
+    "prettier": "^1.10.2"
   }
 }

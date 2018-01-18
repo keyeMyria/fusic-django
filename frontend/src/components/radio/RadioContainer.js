@@ -12,13 +12,13 @@ const mapStateToProps = state => {
 
 class RadioContainer extends React.Component {
   componentDidMount() {
-    const { dispatch, id } = this.props;
-    dispatch(subscribe(id));
+    const { id } = this.props;
+    subscribe(id);
   }
 
   componentWillUnmount() {
-    const { dispatch, id } = this.props;
-    dispatch(unsubscribe(id));
+    const { id } = this.props;
+    unsubscribe(id);
   }
 
   onVote = (songId, e) => this.props.dispatch(upVote(songId, this.props.id));

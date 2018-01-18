@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import promiseMiddleware from 'redux-promise-middleware';
+import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import reducers from './reducers';
@@ -10,8 +11,9 @@ const middleware =
     ? [
         promiseMiddleware(),
         require('redux-immutable-state-invariant').default(),
+        thunk,
       ]
-    : [promiseMiddleware()];
+    : [promiseMiddleware(), thunk];
 
 const store = createStore(
   reducers,
