@@ -1,5 +1,6 @@
 import logging
 
+from channels import Group
 from channels.binding.websockets import WebsocketBinding
 from channels.generic.websockets import WebsocketDemultiplexer
 
@@ -59,3 +60,38 @@ class Demultiplexer(WebsocketDemultiplexer):
 
     def connection_groups(self, pk, **kwargs):
         return ['radios-' + pk]
+
+# rewrite starts here
+
+
+class RadioBinding2(WebsocketBinding):
+    model = Radio
+    fields = []
+    # stream = "radios"
+
+    def run_action(self, action, pk, data):
+        """
+        Performs the requested action
+        """
+        # Check to see if we're allowed
+        if self.has_permission(self.user, action, pk):
+            if action == "sub":
+                self.sub(pk)
+            else:
+                raise ValueError("Bad action %r" % action)
+
+    def has_permission(self, user, action, pk):
+        return True
+
+    def sub(self, pk):
+        logger.info('sub: %s', pk)
+        Group('radios-%s' % pk, channel_layer=self.message.channel_layer).add(self.message.reply_channel)
+
+    def serialize_data(self, instance):
+        return RadioSerializer(instance).data
+
+
+class Demultiplexer2(WebsocketDemultiplexer):
+    consumers = {
+        "radios": RadioBinding2.consumer,
+    }
