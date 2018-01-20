@@ -11,14 +11,36 @@ const mapStateToProps = state => {
 };
 
 class RadioContainer extends React.Component {
+  // count how many RadioContainers are constructed
+  static subscriptions = {};
+
+  subscribe(radioId) {
+    if (radioId in this.constructor.subscriptions)
+      this.constructor.subscriptions[radioId]++;
+    else {
+      this.constructor.subscriptions[radioId] = 1;
+
+      this.props.dispatch(subscribe(radioId));
+    }
+  }
+
+  unsubscribe(radioId) {
+    if (!(radioId in this.constructor.subscriptions))
+      throw new Error(`unsubscribe unknown subscription: ${radioId}`);
+    this.constructor.subscriptions[radioId]--;
+
+    if (this.constructor.subscriptions[radioId] === 0)
+      this.props.dispatch(unsubscribe(radioId));
+  }
+
   componentDidMount() {
     const { id } = this.props;
-    subscribe(id);
+    this.subscribe(id);
   }
 
   componentWillUnmount() {
     const { id } = this.props;
-    unsubscribe(id);
+    this.unsubscribe(id);
   }
 
   onVote = (songId, e) => this.props.dispatch(upVote(songId, this.props.id));

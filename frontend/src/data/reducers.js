@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
 import { handleActions } from 'redux-actions';
-import { updateRadio } from './actions';
+import { wsUpdate } from './actions';
+
+const updateRadio = 'updateRadio'; // TODO: remove updateRadio & add wsUpdate
 
 function setEntity(entityMap = {}, entity) {
   return {
