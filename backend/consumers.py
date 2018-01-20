@@ -1,6 +1,7 @@
 import logging
 
 from channels import Group
+from channels.binding.base import CREATE
 from channels.binding.websockets import WebsocketBinding
 from channels.generic.websockets import WebsocketDemultiplexer
 
@@ -85,6 +86,8 @@ class RadioBinding2(WebsocketBinding):
 
     def sub(self, pk):
         logger.info('sub: %s', pk)
+        payload = self.serialize(self.model.objects.get(pk=pk), CREATE)
+        self.kwargs['multiplexer'].send(payload)
         Group('radios-%s' % pk, channel_layer=self.message.channel_layer).add(self.message.reply_channel)
 
     def serialize_data(self, instance):
