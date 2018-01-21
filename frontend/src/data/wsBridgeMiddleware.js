@@ -16,7 +16,7 @@ const wsBridgeMiddleware = (ws, stream) => store => {
 
   ws.demultiplex(stream, payload => {
     console.log('stream data:', payload);
-    store.dispatch(wsUpdate(stream, payload));
+    store.dispatch(wsUpdate(payload));
   });
 
   const queue = [];

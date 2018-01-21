@@ -1,5 +1,4 @@
-import { createAction, createActions } from 'redux-actions';
-import { Bridge } from 'django-channels';
+import { createAction } from 'redux-actions';
 
 import { createVote } from './api';
 
@@ -7,10 +6,7 @@ export const upVote = createAction('upVote', function(songId, playlistId) {
   return createVote(songId, playlistId);
 });
 
-export const wsUpdate = createAction('wsUpdate', (stream, payload) => ({
-  stream,
-  payload,
-}));
+export const wsUpdate = createAction('wsUpdate');
 
 export const subscribe = createAction(
   'subscribe',

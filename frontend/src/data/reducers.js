@@ -2,8 +2,6 @@ import { combineReducers } from 'redux';
 import { handleActions } from 'redux-actions';
 import { wsUpdate } from './actions';
 
-const updateRadio = 'updateRadio'; // TODO: remove updateRadio & add wsUpdate
-
 function setEntity(entityMap = {}, entity) {
   return {
     ...entityMap,
@@ -24,14 +22,19 @@ function setEntities(entityMap = {}, entities) {
 
 const radioReducer = handleActions(
   {
-    [updateRadio]: (state, action) => {
-      const { songs, votes, ...radio } = action.payload;
-
-      return {
-        radios: setEntity(state.radios, radio),
-        songs: setEntities(state.songs, songs),
-        votes: setEntities(state.votes, votes),
-      };
+    [wsUpdate]: (state, action) => {
+      const { modelAction, model, data } = action.payload;
+      switch (model) {
+        case 'backend.radio':
+          const { songs, votes, ...radio } = data;
+          return {
+            radios: setEntity(state.radios, radio),
+            songs: setEntities(state.songs, songs),
+            votes: setEntities(state.votes, votes),
+          };
+        default:
+          return state;
+      }
     },
   },
   {
