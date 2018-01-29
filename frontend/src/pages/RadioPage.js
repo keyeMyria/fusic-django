@@ -8,7 +8,8 @@ import Toolbar from 'material-ui/Toolbar';
 import List, { ListItem, ListItemText } from 'material-ui/List';
 import Typography from 'material-ui/Typography';
 import Divider from 'material-ui/Divider';
-import RadioContainer from './components/radio/RadioContainer';
+
+import RadioContainer from '../components/radio/RadioContainer';
 
 const drawerWidth = 240;
 
@@ -49,7 +50,7 @@ const styles = theme => ({
   },
 });
 
-const PermanentDrawer = ({ classes }) => {
+const RadioPage = ({ classes, match: { params: { id } } }) => {
   return (
     <div className={classes.root}>
       <div className={classes.appFrame}>
@@ -84,15 +85,20 @@ const PermanentDrawer = ({ classes }) => {
           <Typography type="body1">
             {'You think water moves fast? You should see ice.'}
           </Typography>
-          <RadioContainer id={1} />
+          <RadioContainer id={id} />
         </main>
       </div>
     </div>
   );
 };
 
-PermanentDrawer.propTypes = {
+RadioPage.propTypes = {
   classes: PropTypes.object.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }),
+  }),
 };
 
-export default withStyles(styles)(PermanentDrawer);
+export default withStyles(styles)(RadioPage);
