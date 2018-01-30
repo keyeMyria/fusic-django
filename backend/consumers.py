@@ -68,7 +68,11 @@ class Demultiplexer(WebsocketDemultiplexer):
 class RadioBinding2(WebsocketBinding):
     model = Radio
     fields = []
-    # stream = "radios"
+    stream = "radios"
+
+    @classmethod
+    def group_names(cls, instance):
+        return ['radios-%s' % instance.pk]
 
     def run_action(self, action, pk, data):
         """
