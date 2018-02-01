@@ -1,23 +1,18 @@
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import { withStyles } from 'material-ui/styles';
-import AppBar from 'material-ui/AppBar';
-import BottomNavigation, {
-  BottomNavigationAction,
-} from 'material-ui/BottomNavigation';
-import Divider from 'material-ui/Divider';
-import Drawer from 'material-ui/Drawer';
-import Icon from 'material-ui/Icon';
-import List, { ListItem, ListItemText } from 'material-ui/List';
-import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
+import Slider from 'rc-slider';
 
-import FavoriteIcon from 'material-ui-icons/Favorite';
-import LocationOnIcon from 'material-ui-icons/LocationOn';
-import RestoreIcon from 'material-ui-icons/Restore';
+import Shuffle from 'material-ui-icons/Shuffle';
+import SkipPrevious from 'material-ui-icons/SkipPrevious';
+import SkipNext from 'material-ui-icons/SkipNext';
+import PauseCircleOutline from 'material-ui-icons/PauseCircleOutline';
+import PlayCircleOutline from 'material-ui-icons/PlayCircleOutline';
+
+import 'rc-slider/assets/index.css';
 
 const styles = theme => ({
   root: {
@@ -58,6 +53,7 @@ const styles = theme => ({
   },
   footerInfo: {
     minWidth: 0,
+    overflow: 'hidden',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -91,6 +87,7 @@ const NewPage = ({ classes }) => {
           <img
             className={classes.footerImg}
             src="https://i.pinimg.com/736x/f7/d8/07/f7d807c40002aa4139517a5ea22aab3a--best-album-art-top-albums.jpg"
+            alt="Album art"
           />
           <div className={classes.footerInfo}>
             <Typography type="title" className={classes.footerTitle}>
@@ -102,7 +99,13 @@ const NewPage = ({ classes }) => {
           </div>
         </div>
 
-        <div className={classes.footerControls}>Controls</div>
+        <div className={classes.footerControls}>
+          <Shuffle />
+          <SkipPrevious />
+          <PauseCircleOutline />
+          <SkipNext />
+          <Slider />
+        </div>
         <div className={classes.footerSettings}>Settings</div>
       </footer>
     </div>
