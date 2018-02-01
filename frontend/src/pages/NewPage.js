@@ -32,21 +32,42 @@ const styles = theme => ({
     width: '100%',
     backgroundColor: 'grey',
     display: 'flex',
-    padding: '16px',
+    justifyContent: 'space-between',
   },
+
+  // the 3 main elements
+  footerDetails: {
+    flex: '0 0 20%',
+    minWidth: 0,
+    display: 'flex',
+  },
+  footerControls: {
+    backgroundColor: 'green',
+    flex: '0 0 50%',
+  },
+  footerSettings: {
+    flex: '0 0 20%',
+  },
+
+  // footerDetails
   footerImg: {
     display: 'block',
     width: '64px',
     height: '64px',
+    padding: '10px',
   },
-  footerDetails: {
-    marginLeft: '16px',
+  footerInfo: {
+    minWidth: 0,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
   },
-  footerControls: {
-    flex: '1 0 0',
+
+  footerTitle: {
+    whiteSpace: 'nowrap',
+  },
+  footerArtist: {
+    whiteSpace: 'nowrap',
   },
 });
 
@@ -64,17 +85,25 @@ const NewPage = ({ classes }) => {
           <Typography>xs=6</Typography>
         </Grid>
       </Grid>
+
       <footer className={classes.footer}>
-        <img
-          className={classes.footerImg}
-          src="https://i.pinimg.com/736x/f7/d8/07/f7d807c40002aa4139517a5ea22aab3a--best-album-art-top-albums.jpg"
-        />
         <div className={classes.footerDetails}>
-          <Typography type="title">Title</Typography>
-          <Typography type="subheading">Artist</Typography>
+          <img
+            className={classes.footerImg}
+            src="https://i.pinimg.com/736x/f7/d8/07/f7d807c40002aa4139517a5ea22aab3a--best-album-art-top-albums.jpg"
+          />
+          <div className={classes.footerInfo}>
+            <Typography type="title" className={classes.footerTitle}>
+              Some really long title
+            </Typography>
+            <Typography type="subheading" className={classes.footerArtist}>
+              An amazing artist
+            </Typography>
+          </div>
         </div>
+
         <div className={classes.footerControls}>Controls</div>
-        <div>Settings</div>
+        <div className={classes.footerSettings}>Settings</div>
       </footer>
     </div>
   );
