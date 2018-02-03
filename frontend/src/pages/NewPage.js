@@ -18,14 +18,13 @@ const styles = theme => ({
   root: {
     width: '100%',
     height: '100%',
-    zIndex: 1,
-    overflow: 'hidden',
+    backgroundColor: theme.palette.primary.main,
   },
   footer: {
     position: 'absolute',
     bottom: 0,
     width: '100%',
-    backgroundColor: 'grey',
+    backgroundColor: theme.palette.primary.light,
     display: 'flex',
     justifyContent: 'space-between',
   },
@@ -37,7 +36,6 @@ const styles = theme => ({
     display: 'flex',
   },
   footerControls: {
-    backgroundColor: 'green',
     flex: '0 0 50%',
   },
   footerSettings: {
@@ -67,7 +65,16 @@ const styles = theme => ({
   },
 });
 
-const NewPage = ({ classes }) => {
+const NewPage = ({ classes, theme }) => {
+  const trackStyle = {
+    backgroundColor: theme.palette.secondary.main,
+  };
+
+  const handleStyle = {
+    borderColor: theme.palette.primary.contrastText,
+    backgroundColor: theme.palette.primary.contrastText,
+  };
+
   return (
     <div className={classes.root}>
       <Grid container spacing={24}>
@@ -100,11 +107,11 @@ const NewPage = ({ classes }) => {
         </div>
 
         <div className={classes.footerControls}>
-          <Shuffle />
+          <Shuffle color="error" />
           <SkipPrevious />
-          <PauseCircleOutline />
-          <SkipNext />
-          <Slider />
+          <PauseCircleOutline color="secondary" />
+          <SkipNext color="action" />
+          <Slider trackStyle={trackStyle} handleStyle={handleStyle} />
         </div>
         <div className={classes.footerSettings}>Settings</div>
       </footer>
@@ -116,4 +123,4 @@ NewPage.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(NewPage);
+export default withStyles(styles, { withTheme: true })(NewPage);
