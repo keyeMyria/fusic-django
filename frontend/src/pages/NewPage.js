@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import Slider from 'rc-slider';
+
 import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
-import Slider from 'rc-slider';
+import Button from 'material-ui/Button';
 
 import Shuffle from 'material-ui-icons/Shuffle';
 import SkipPrevious from 'material-ui-icons/SkipPrevious';
@@ -37,6 +39,7 @@ const styles = theme => ({
   },
   footerControls: {
     flex: '0 0 50%',
+    position: 'relative', // for the slider
   },
   footerSettings: {
     flex: '0 0 20%',
@@ -63,6 +66,11 @@ const styles = theme => ({
   footerArtist: {
     whiteSpace: 'nowrap',
   },
+
+  slider: {
+    position: 'absolute',
+    bottom: 10,
+  },
 });
 
 const NewPage = ({ classes, theme }) => {
@@ -79,7 +87,17 @@ const NewPage = ({ classes, theme }) => {
     <div className={classes.root}>
       <Grid container spacing={24}>
         <Grid item xs={12}>
-          <Typography>xs=12</Typography>
+          <Typography>asdf</Typography>
+          <Button>Asdf</Button>
+          <Button color="primary">Asdf</Button>
+          <Button color="secondary">Asdf</Button>
+          <Button raised>Asdf</Button>
+          <Button raised color="primary">
+            Asdf
+          </Button>
+          <Button raised color="secondary">
+            Asdf
+          </Button>
         </Grid>
         <Grid item xs={6}>
           <Typography>xs=6</Typography>
@@ -111,7 +129,11 @@ const NewPage = ({ classes, theme }) => {
           <SkipPrevious />
           <PauseCircleOutline color="secondary" />
           <SkipNext color="action" />
-          <Slider trackStyle={trackStyle} handleStyle={handleStyle} />
+          <Slider
+            className={classes.slider}
+            trackStyle={trackStyle}
+            handleStyle={handleStyle}
+          />
         </div>
         <div className={classes.footerSettings}>Settings</div>
       </footer>
