@@ -20,13 +20,13 @@ const styles = theme => ({
   root: {
     width: '100%',
     height: '100%',
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.background.default,
   },
   footer: {
     position: 'absolute',
     bottom: 0,
     width: '100%',
-    backgroundColor: theme.palette.primary.light,
+    backgroundColor: theme.palette.background.paper,
     display: 'flex',
     justifyContent: 'space-between',
   },
@@ -75,12 +75,12 @@ const styles = theme => ({
 
 const NewPage = ({ classes, theme }) => {
   const trackStyle = {
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.primary.main,
   };
 
   const handleStyle = {
-    borderColor: theme.palette.primary.contrastText,
-    backgroundColor: theme.palette.primary.contrastText,
+    borderColor: theme.palette.text.primary,
+    backgroundColor: theme.palette.text.primary,
   };
 
   return (
@@ -125,9 +125,9 @@ const NewPage = ({ classes, theme }) => {
         </div>
 
         <div className={classes.footerControls}>
-          <Shuffle color="error" />
-          <SkipPrevious />
-          <PauseCircleOutline color="secondary" />
+          <Shuffle color="primary" />
+          <SkipPrevious color="action" />
+          <PauseCircleOutline color="error" />
           <SkipNext color="action" />
           <Slider
             className={classes.slider}
