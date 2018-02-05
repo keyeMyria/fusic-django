@@ -15,6 +15,7 @@ import PauseCircleOutline from 'material-ui-icons/PauseCircleOutline';
 import PlayCircleOutline from 'material-ui-icons/PlayCircleOutline';
 
 import 'rc-slider/assets/index.css';
+import BrowseItem from '../components/BrowseItem';
 
 const styles = theme => ({
   root: {
@@ -100,7 +101,7 @@ const NewPage = ({ classes, theme }) => {
           </Button>
         </Grid>
         <Grid item xs={6}>
-          <Typography>xs=6</Typography>
+          <BrowseItem />>
         </Grid>
         <Grid item xs={6}>
           <Typography>xs=6</Typography>
