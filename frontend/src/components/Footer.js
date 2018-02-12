@@ -6,12 +6,14 @@ import Slider from 'rc-slider';
 
 import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
+import Button from 'material-ui/Button';
 
 import Shuffle from 'material-ui-icons/Shuffle';
 import SkipPrevious from 'material-ui-icons/SkipPrevious';
 import SkipNext from 'material-ui-icons/SkipNext';
 import PauseCircleOutline from 'material-ui-icons/PauseCircleOutline';
 import PlayCircleOutline from 'material-ui-icons/PlayCircleOutline';
+import Settings from 'material-ui-icons/Settings';
 
 import 'rc-slider/assets/index.css';
 
@@ -57,9 +59,17 @@ const styles = theme => ({
     whiteSpace: 'nowrap',
   },
 
+  // footerControls
   slider: {
     position: 'absolute',
     bottom: 10,
+  },
+
+  // footerSettings
+  settingsButton: {
+    height: '100%',
+    position: 'absolute',
+    right: 0,
   },
 });
 
@@ -104,7 +114,11 @@ const Footer = ({ classes, theme, className: classNameProp }) => {
           handleStyle={handleStyle}
         />
       </div>
-      <div className={classes.footerSettings}>Settings</div>
+      <div className={classes.footerSettings}>
+        <Button className={classes.settingsButton}>
+          <Settings />
+        </Button>
+      </div>
     </footer>
   );
 };
