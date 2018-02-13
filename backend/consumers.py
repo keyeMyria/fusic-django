@@ -28,6 +28,8 @@ class RadioBinding(WebsocketBinding):
         if self.has_permission(self.user, action, pk):
             if action == "sub":
                 self.sub(pk)
+            elif action == "unsub":
+                self.unsub(pk)
             else:
                 raise ValueError("Bad action %r" % action)
 
@@ -39,6 +41,10 @@ class RadioBinding(WebsocketBinding):
         payload = self.serialize(self.model.objects.get(pk=pk), CREATE)
         self.kwargs['multiplexer'].send(payload)
         Group('radios-%s' % pk, channel_layer=self.message.channel_layer).add(self.message.reply_channel)
+
+    def unsub(self, pk):
+        logger.info('unsub: %s', pk)
+        Group('radios-%s' % pk, channel_layer=self.message.channel_layer).discard(self.message.reply_channel)
 
     def serialize_data(self, instance):
         return RadioSerializer(instance).data
