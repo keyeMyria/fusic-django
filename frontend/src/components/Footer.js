@@ -60,6 +60,13 @@ const styles = theme => ({
   },
 
   // footerControls
+  footerControlWrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  footerControl: {
+    flex: '0 0 24px',
+  },
   slider: {
     position: 'absolute',
     bottom: 10,
@@ -104,10 +111,15 @@ const Footer = ({ classes, theme, className: classNameProp }) => {
       </div>
 
       <div className={classes.footerControls}>
-        <Shuffle color="primary" />
-        <SkipPrevious color="action" />
-        <PauseCircleOutline color="error" />
-        <SkipNext color="action" />
+        <div className={classes.footerControlWrapper}>
+          <Shuffle color="action" className={classes.footerControl} />
+          <SkipPrevious color="action" className={classes.footerControl} />
+          <PauseCircleOutline
+            color="action"
+            className={classes.footerControl}
+          />
+          <SkipNext color="action" className={classes.footerControl} />
+        </div>
         <Slider
           className={classes.slider}
           trackStyle={trackStyle}
