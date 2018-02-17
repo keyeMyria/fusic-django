@@ -4,9 +4,18 @@ import { Link } from 'react-router-dom';
 export default () => (
   <div>
     <p>
-      This is the index page, browse &amp; stuff.{' '}
-      <Link to="/radios/1/">Radio</Link>
-      <Link to="/new/">New</Link>
+      This is the index page, browse &amp; stuff.
+      <ul>
+        <li>
+          <Link to="/radios/1/">Radio</Link>
+        </li>
+        <li>
+          <Link to="/new/">New</Link>
+        </li>
+        <li>
+          <Link to="/components/">Component list</Link>
+        </li>
+      </ul>
     </p>
   </div>
 );
