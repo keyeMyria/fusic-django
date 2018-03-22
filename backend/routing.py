@@ -1,5 +1,22 @@
-from .consumers import Demultiplexer
+from channels.consumer import SyncConsumer
+from channels.routing import URLRouter
+from django.conf.urls import url
 
-channel_routing = [
-    Demultiplexer.as_route(path=r"^/ws"),
-]
+
+class EchoConsumer(SyncConsumer):
+
+    def websocket_connect(self, event):
+        self.send({
+            "type": "websocket.accept",
+        })
+
+    def websocket_receive(self, event):
+        self.send({
+            "type": "websocket.send",
+            "text": event["text"],
+        })
+
+
+ApiConsumer = URLRouter([
+    url("^", EchoConsumer),
+])

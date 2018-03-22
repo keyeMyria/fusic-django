@@ -72,14 +72,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'fusic.wsgi.application'
-
-# https://channels.readthedocs.io/en/latest/getting-started.html
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "asgiref.inmemory.ChannelLayer",
-        "ROUTING": "fusic.routing.channel_routing",
-    },
-}
+ASGI_APPLICATION = "fusic.routing.application"
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
